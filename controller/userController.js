@@ -40,7 +40,7 @@ const userLogin = async (req, res) => {
         },
       },
       process.env.SECRET,
-      { expiresIn: "1h" }
+      { expiresIn: "6h" }
     );
     res.json({ accessToken, user: user });
   }
@@ -50,4 +50,11 @@ const userProfile = (req, res) => {
   res.json({ message: "user page.." });
 };
 
-module.exports = { userRegister, userLogin, userProfile };
+const getSingleUser = async (req, res) => {
+  const id = req.params.id;
+  console.log(id)
+  const result = await User.findById(id);
+  res.send(result);
+}
+
+module.exports = { userRegister, userLogin, userProfile, getSingleUser };

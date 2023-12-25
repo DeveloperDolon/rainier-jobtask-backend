@@ -32,12 +32,14 @@ const postCourse = async (req, res) => {
 };
 
 const getSpecificCourse = async (req, res) => {
+  
   const course = await Courses.findById(req.params.id);
+  
   if (!course) {
     res.status(404).send("'not  found..sorry..");
     throw new Error("'not  found..sorry..");
   }
-
+  
   res.send(course);
 };
 

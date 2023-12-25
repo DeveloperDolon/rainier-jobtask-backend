@@ -16,7 +16,7 @@ route.get("/", getCourse);
 
 route.post("/", validateToken, postCourse);
 
-route.get("/:id", validateToken, getSpecificCourse);
+route.get("/:id", getSpecificCourse);
 
 route.put("/:id", validateToken, updateCourse);
 
