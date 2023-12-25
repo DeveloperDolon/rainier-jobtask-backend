@@ -8,7 +8,12 @@ require("dotenv").config();
 
 
 const userRegister = async (req, res) => {
+  
   const { userName, email, password } = req.body;
+  const isExist = await User.findOne({ email });
+  if(isExist) {
+    return res.status(403).send({message: "User already exists!"})
+  }
   const hashedPassword = await bcrypt.hash(password, 10);
   const user = await User.create({
     userName,
@@ -37,7 +42,7 @@ const userLogin = async (req, res) => {
       process.env.SECRET,
       { expiresIn: "1h" }
     );
-    res.json({ accessToken });
+    res.json({ accessToken, user: user });
   }
 };
 

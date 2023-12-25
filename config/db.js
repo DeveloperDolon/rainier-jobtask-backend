@@ -1,13 +1,15 @@
 const mongoose = require("mongoose");
+require('dotenv').config();
 
 const mongodb = async () => {
   try {
-    const database = await mongoose.connect(
-      `mongodb://127.0.0.1:27017/courseManagement`
-    ); 
-    console.log("database connect..");
+    console.log("Collecting to db.")
+    await mongoose.connect(
+      `${process.env.DATABASE_LOCAL}`, {dbName: "couseManagementDB"}
+    );
+    console.log("database connected..");
   } catch (err) {
-    console.log(err);
+    console.log(err.message);
     process.exit(1);
   }
 };
